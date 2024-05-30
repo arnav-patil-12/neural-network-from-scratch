@@ -54,4 +54,10 @@ class Sigmoid(Activation):
         super().__init__(sigmoid, sigmoid_prime)
 
 
-# TODO: Add ReLU(Activation)
+class ReLU(Activation):
+    def __init__(self):
+        def relu(x):
+            return np.maximum(0, x)
+
+        def relu_prime(x):
+            return np.where(x > 0, x, 0)
