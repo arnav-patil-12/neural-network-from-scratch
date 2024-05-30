@@ -52,3 +52,6 @@ class Sigmoid(Activation):
             return (1 / (1 + np.exp(-x))) * (1 - (1 / (1 + np.exp(-x))))
 
         super().__init__(sigmoid, sigmoid_prime)
+
+
+# TODO: Add ReLU(Activation)
