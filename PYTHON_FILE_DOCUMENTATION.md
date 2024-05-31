@@ -104,4 +104,11 @@ With that, the error functions have been defined, and we can now make a separate
 
 ## [run.py](run.py)
 
+In this file, I will be defining three functions, ```run()```, ```train()```, and ```test()``` that I will import into [main.py](main.py) for simplicity. I will start with the ```train``` function. In this function, we want to loop over the training data set several times. We also want to define an error which we will initialize to zero. 
 
+```
+for epoch in range(epochs + 1):
+        error = 0
+```
+
+We will then loop over each item in the training dataset, 
