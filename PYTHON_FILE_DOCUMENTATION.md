@@ -111,4 +111,75 @@ for epoch in range(epochs + 1):
         error = 0
 ```
 
-We will then loop over each item in the training dataset, 
+We will then loop over each item in the training dataset. We want to run each item through the dataset, then calculate its error, and instruct the model to correct itself through backpropogation. This means that within the for loop defined above, we will have a nested for loop, which in turn contains anoter two for loops that iterate through each layer in the network. Starting with the iteration over each item in the dataset:
+
+```
+for x, y in zip(X, Y):
+        output = x
+```
+
+Then, we can loop through each layer (forward), calculate the gradient descent, then go backwards through the model:
+
+```
+for layer in network:
+    output = layer.forward(output)
+error += error_func(y, output)
+grad = error_prime(y, output)
+for layer in reversed(network):
+    grad = layer.backward(grad, learning_rate)
+```
+
+Lastly, we average out the error and print, marking the end of the function.
+
+```
+error /= len(X)
+        if epoch % 10 == 0:
+            print(f'Epoch: {epoch:3} | Error: {error}')
+```
+
+Now, we can assemble the ```test``` function, which contains essentially the same forward code, but no error backpropogation. For this function, iterating over each item in the dataset, then again through each layer of the network will suffice. 
+
+```
+def test(network, X, Y, error_func):
+    error = 0
+    for x, y in zip(X, Y):
+        output = x
+        for layer in network:
+            output = layer.forward(output)
+        error += error_func(y, output)
+    error /= len(X)
+    print(f'Average Error: {error}')
+```
+
+Lastly, we can consolidate this code into a single function called ```run```. 
+
+```
+def run(network, X, Y, error_func, error_prime, epochs, learning_rate):
+    print()
+
+    #for loop to train network
+    for epoch in range(epochs + 1):
+        error = 0
+        for x, y in zip(X, Y):
+            output = x
+            for layer in network:
+                output = layer.forward(output)
+            error += error_func(y, output)
+            gradient = error_prime(y, output)
+            for layer in reversed(network):
+                gradient = layer.backward(gradient, learning_rate)
+        error /= len(X)
+        if epoch % 10 == 0:
+            print(f'Epoch: {epoch:3} | Error: {error}')
+    print('\n---------------------------------------------\n')
+
+    #for loop to test network
+    error = 0
+    for x, y in zip(X, Y):
+        output = x
+        for layer in network:
+            output = layer.forward(output)
+        error += error_func(y, output)
+    error /= len(X)
+    print(f'Test Error: {error}\n')
+```
