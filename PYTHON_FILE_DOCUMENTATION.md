@@ -183,3 +183,66 @@ def run(network, X, Y, error_func, error_prime, epochs, learning_rate):
     error /= len(X)
     print(f'Test Error: {error}\n')
 ```
+
+We're almost there 😩😩...
+
+## [main.py](main.py)
+
+In this last function, we will assemble all of our required functions/data, put together the netowrk, and run it! We will be training our network using an XOR gate, who's truth table is given below. 
+
+| A | B | A XOR B |
+|---|---|---------|
+| 0 | 0 |    0    |
+| 0 | 1 |    1    |
+| 1 | 0 |    1    |
+| 1 | 1 |    0    |
+
+Note that this file is meant to be as simple and easily-readable as possible, which is why we've been assembling all our code in different & separate files. I know that this is a standard practice in industry, but as a first-year student who's taken one semi-competent Python class, we never worked with code of this length or complexity. That being said, I'm glad I took on this project because it showed me the importance of good code over working code.
+
+We begin with importing the functions we've spent so long translating from math to Python.
+
+```
+from layers, import Linear, Sigmoid
+from error_functions import mse, mse_prime
+from run import run
+import numpy as np
+```
+
+Then, we will provide the dataset we want the model to "learn" about. Using the truth table above, we are able to code it as thus:
+
+```
+# XOR gate data
+X = np.reshape([[0, 0], [0, 1], [1, 0], [1, 1]], (4, 2, 1))
+Y = np.reshape([[0], [1], [1], [0]], (4, 1, 1))
+```
+
+ASIDE: I didn't fully understand what the ```np.reshape``` was doing, but a quick [ChatGPT query](https://chatgpt.com/share/7dad0b77-0a48-4952-8cb8-b4922e78eb45) answered that question.
+
+Next, we initalized the model itself. To my surprise, the "network" that we've been attempting to build all this time is really just a list of functions. That being said, I will walk through each layer in the network to the best of my ability.
+
+First, we have a Linear layer, which takes in two inputs, since the XOR gate is also given two inputs. We will output this to another layer with 10 neurons, then run the sigmoid function on it to compress the activations between 0 and 1. We will then pass it to another Linear layer, this one with 10 inputs (the previous had 10 outputs) and 10 outputs. Again, the sigmoid "squishes" the activations between 0 and 1. Finally, another layer and sigmoid takes in the 10 inputs and outputs only 1 value, which is the output of the XOR gate.
+
+```
+# intialize the model
+network = [
+    Linear(2, 10),
+    Sigmoid(),
+    Linear(10, 10),
+    Sigmoid(),
+    Linear(10, 1),
+    Sigmoid()
+]
+```
+
+The last step before we can run the network is to define the hyperparameters, which is the epochs (100000) and the learning rate (0.1). Once done, we can move on to running the network.
+
+```
+# hyperparameters
+epochs = 100000
+learning_rate = 0.1
+
+#running the network
+run(network, X, Y, mse, mse_prime, epochs, learning_rate)
+```
+
+As of writing this documentation, my code is still quite messy, and I fully intend on going back and adding additional details through commenting. I also wrote this documentation before explaining the math behind the network in [README.md](README.md), because I will need a longer time to fully digest it all. With that, we have constructed our neural network from scratch! 
