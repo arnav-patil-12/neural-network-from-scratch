@@ -3,7 +3,7 @@
 As promised in [README.md](README.md), this document is meant to provide an overview of my code my understanding of it as I followed through the video playlist.
 
 ### Table of Contents
-1. [layers.py]()
+1. [layers.py](https://github.com/arnav-patil-12/neural-network-from-scratch/blob/main/PYTHON_FILE_DOCUMENTATION.md)
 2. [erorr_functions.py]()
 3. [run.py]()
 4. [main.py]()
