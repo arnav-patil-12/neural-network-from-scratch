@@ -2,6 +2,12 @@
 
 As promised in [README.md](README.md), this document is meant to provide an overview of my code my understanding of it as I followed through the video playlist.
 
+### Table of Contents
+1. [layers.py]()
+2. [erorr_functions.py]()
+3. [run.py]()
+4. [main.py]()
+
 ## [layers.py](layers.py)
 
 This was the first file I created, because it's the first one the video creates as well. I began by creating an abstract class ```Layer``` which I will use as the basis for all my layers. The ```NotImplementedError``` is raised to signify that ```Layer``` is an abstract class and should not be initalized as it is.
