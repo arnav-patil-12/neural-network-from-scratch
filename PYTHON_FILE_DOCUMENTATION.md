@@ -82,3 +82,20 @@ class ReLU(Activation):
         def relu_prime(x):
             return np.where(x > 0, x, 0)
 ```
+
+With the layers defined, we can now go ahead and code our error functions, which we use (for backpropogation), or to actually make our netowork "learn" from one training example to the next.
+
+## [error_functions.py](error_functions.py)
+
+For this simple neural network, I chose to include the most commonly-used error function, the mean squared error (or MSE). 
+
+```
+def mse(y_true, y_pred):
+    return np.mean(np.power(y_true - y_pred, 2))
+
+
+def mse_prime(y_true, y_pred):
+    return 2 * (y_pred - y_true) / np.size(y_true)
+```
+
+```mse_prime()``` is the first derivative of the MSE function. This is included because the netowrk relies on the derivative of the error function to calculate gradient (for gradient descent).
