@@ -98,4 +98,10 @@ def mse_prime(y_true, y_pred):
     return 2 * (y_pred - y_true) / np.size(y_true)
 ```
 
-```mse_prime()``` is the first derivative of the MSE function. This is included because the netowrk relies on the derivative of the error function to calculate gradient (for gradient descent).
+```mse_prime()``` is the first derivative of the MSE function. This is included because the netowrk relies on the derivative of the error function to calculate gradient (for gradient descent), which is further used to minimize the cost function.
+
+With that, the error functions have been defined, and we can now make a separate file to define functions to actually manipulate the model.
+
+## [run.py](run.py)
+
+
