@@ -24,5 +24,10 @@ In this README file, I will walk through and provide notes/comments on the video
 
 
 
-## Attention in transformers
+## Chapter 6: Attention in transformers
 
+
+
+## What's Next?
+
+From here, I would like to take a dive into convulutional neural networks (CNNs), which differ from a standard neural network. Primarily, standard neural networks employ fully connected layers, whereas CNNs apply convolution operations between the start and the end. As a result, CNN's are preferred for grid-like data such as images and sounds.
