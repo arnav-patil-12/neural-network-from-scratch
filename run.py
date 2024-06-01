@@ -23,7 +23,7 @@ def run(network, X, Y, error_func, error_prime, epochs, learning_rate):
             print(f'Epoch: {epoch:3} | Error: {error}')
     print('\n---------------------------------------------\n')
 
-    #Reset error and 
+    #Reset error and
     error = 0
     for x, y in zip(X, Y):
         output = x

@@ -2,7 +2,11 @@ import numpy as np
 
 
 def mse(y_true, y_pred):
-    # Generic formula for mean square error.
+    """
+    (float, float) -> float
+
+    Calculates the mean squared error between y_pred and y_true.
+    """
     return np.mean(np.power(y_true - y_pred, 2))
 
 
